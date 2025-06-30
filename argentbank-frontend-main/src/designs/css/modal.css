@@ -1,0 +1,66 @@
+/* modal.css */
+
+/* Style de l'arrière-plan semi-transparent derrière la modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Style de la modal elle-même */
+  .modal {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    max-width: 80%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style pour le titre de la modal */
+  .modal h2 {
+    margin-bottom: 15px;
+  }
+  
+  /* Style pour les étiquettes et les champs de saisie */
+  .modal label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Style pour les champs de saisie */
+  .modal input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  /* Style pour les boutons */
+  .modal button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  /* Style pour le bouton de fermeture */
+  .modal button:last-child {
+    background-color: #ccc;
+  }
+  
+  /* Style pour le bouton de fermeture */
+  .modal button:hover {
+    background-color: #0056b3;
+  }
+  
