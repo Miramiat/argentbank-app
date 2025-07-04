@@ -12,25 +12,19 @@ function Profile() {
 
   const [editMode, setEditMode] = useState(false)
 
-  // 🔄 Charger le profil utilisateur au montage
   useEffect(() => {
     if (token && !profile) {
       dispatch(fetchUserProfile())
     }
   }, [token, profile, dispatch])
 
-  // 🔐 Redirection si non connecté
   if (!token) return <Navigate to="/sign-in" />
 
   return (
     <main className="main bg-dark">
       <div className="header">
         {editMode ? (
-          <EditNameForm
-            currentUsername={profile?.userName || ''}
-            onCancel={() => setEditMode(false)}
-            onSuccess={() => setEditMode(false)}
-          />
+          <EditNameForm onClose={() => setEditMode(false)} />
         ) : (
           <>
             <h1>
@@ -52,7 +46,7 @@ function Profile() {
 
       <h2 className="sr-only">Accounts</h2>
 
-      {[ // Données bancaires fictives
+      {[
         {
           title: 'Argent Bank Checking (x8349)',
           amount: '$2,082.79',
@@ -85,4 +79,3 @@ function Profile() {
 }
 
 export default Profile
-
