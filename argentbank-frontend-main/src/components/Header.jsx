@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../features/auth/authSlice'
-
 import argentLogo from '../designs/img/argentBankLogo.png'
 import userIcon from '../designs/img/user-icon.png'
 import settingsIcon from '../designs/img/settings.png'
@@ -22,11 +21,7 @@ function Header() {
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
-        <img
-          className="main-nav-logo-image"
-          src={argentLogo}
-          alt="Argent Bank Logo"
-        />
+        <img className="main-nav-logo-image" src={argentLogo} alt="Argent Bank Logo" />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
 
@@ -36,7 +31,6 @@ function Header() {
             <img
               src={userIcon}
               alt="User Icon"
-              title="User"
               style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }}
             />
             Sign In
@@ -47,33 +41,25 @@ function Header() {
               <img
                 src={userIcon}
                 alt="User Icon"
-                title="Mon profil"
                 style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }}
               />
-              {profile.firstName}
+              {profile.userName}
             </Link>
 
             <span className="main-nav-item">
               <img
                 src={settingsIcon}
                 alt="Settings"
-                title="Paramètres"
                 style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }}
               />
             </span>
 
-            <span
-              className="main-nav-item"
-              onClick={handleLogout}
-              style={{ cursor: 'pointer' }}
-            >
+            <span className="main-nav-item" onClick={handleLogout} style={{ cursor: 'pointer' }}>
               <img
                 src={logoutIcon}
                 alt="Logout Icon"
-                title="Déconnexion"
                 style={{ width: '20px', marginRight: '8px', verticalAlign: 'middle' }}
               />
-              Sign Out
             </span>
           </>
         )}
@@ -83,3 +69,5 @@ function Header() {
 }
 
 export default Header
+
+

@@ -27,7 +27,7 @@ function Profile() {
           <EditNameForm onClose={() => setEditMode(false)} />
         ) : (
           <>
-            <h1>
+            <h1 style={{ paddingTop: '10px' }}>
               Welcome back<br />
               {profile?.firstName} {profile?.lastName}!
             </h1>

@@ -289,3 +289,24 @@ body {
     width: 200px;
   }
 }
+
+@media (max-width: 480px) {
+  .sign-in-content {
+    width: 90%;
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .main-nav-logo-image {
+    width: 120px;
+  }
+
+  .main-nav {
+    padding: 5px 10px;
+  }
+
+  .nav-icons img {
+    width: 18px;
+    height: 18px;
+  }
+}

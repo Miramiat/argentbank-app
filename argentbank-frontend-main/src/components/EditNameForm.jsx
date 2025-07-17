@@ -38,7 +38,7 @@ function EditNameForm({ onSuccess, onCancel }) {
   }, [message])
 
   return (
-    <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center' }}>
+    <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center', paddingTop: '5px' }}>
       <h2 style={{ color: 'white', marginBottom: '1.5rem' }}>Edit user info</h2>
 
       {message && (
@@ -59,7 +59,7 @@ function EditNameForm({ onSuccess, onCancel }) {
       <form onSubmit={handleSubmit}>
         {/* User name */}
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-          <label htmlFor="username" style={{ width: '120px', color: 'white', textAlign: 'right', marginRight: '1rem' }}>
+          <label htmlFor="username" style={{ width: '100px', color: 'white', textAlign: 'right', marginRight: '1rem' }}>
             User name
           </label>
           <input
@@ -69,17 +69,18 @@ function EditNameForm({ onSuccess, onCancel }) {
             onChange={(e) => setNewUsername(e.target.value)}
             style={{
               flex: 1,
-              padding: '8px',
+              padding: '6px',
               fontSize: '1rem',
               borderRadius: '5px',
               border: '1px solid #ccc',
+              marginRight: '1.7rem'
             }}
           />
         </div>
 
         {/* First name */}
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-          <label htmlFor="firstName" style={{ width: '120px', color: 'white', textAlign: 'right', marginRight: '1rem' }}>
+          <label htmlFor="firstName" style={{ width: '100px', color: 'white', textAlign: 'right', marginRight: '1rem' }}>
             First name
           </label>
           <input
@@ -89,18 +90,19 @@ function EditNameForm({ onSuccess, onCancel }) {
             disabled
             style={{
               flex: 1,
-              padding: '8px',
+              padding: '6px',
               fontSize: '1rem',
               borderRadius: '5px',
               border: '1px solid #ccc',
               backgroundColor: '#eee',
+              marginRight: '1.7rem'
             }}
           />
         </div>
 
         {/* Last name */}
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem' }}>
-          <label htmlFor="lastName" style={{ width: '120px', color: 'white', textAlign: 'right', marginRight: '1rem' }}>
+          <label htmlFor="lastName" style={{ width: '100px', color: 'white', textAlign: 'right', marginRight: '1rem' }}>
             Last name
           </label>
           <input
@@ -110,11 +112,12 @@ function EditNameForm({ onSuccess, onCancel }) {
             disabled
             style={{
               flex: 1,
-              padding: '8px',
+              padding: '6px',
               fontSize: '1rem',
               borderRadius: '5px',
               border: '1px solid #ccc',
               backgroundColor: '#eee',
+              marginRight: '1.7rem'
             }}
           />
         </div>

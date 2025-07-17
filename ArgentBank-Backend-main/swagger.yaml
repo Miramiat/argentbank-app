@@ -8,151 +8,210 @@ host: localhost:3001
 basePath: /api/v1
 schemes:
   - http
+
 paths:
   /user/login:
     post:
-      tags:
-        - User Module
+      tags: [User Module]
       summary: Login
-      description: API for Login
+      description: API for user login
       parameters:
         - in: body
           name: body
-          description: Login Payload
           required: true
           schema:
             $ref: '#/definitions/Login'
-      produces:
-        - application/json
+      produces: [application/json]
       responses:
         '200':
           description: Login Successfully
           schema:
             $ref: '#/definitions/LoginResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
+        '400': { description: Invalid Fields }
+        '500': { description: Internal Server Error }
+
   /user/signup:
     post:
-      tags:
-        - User Module
+      tags: [User Module]
       summary: Signup
-      description: API for Signup
+      description: API for user registration
       parameters:
         - in: body
           name: body
-          description: Signup Payload
           required: true
           schema:
             $ref: '#/definitions/User'
-      produces:
-        - application/json
+      produces: [application/json]
       responses:
         '200':
           description: Signup Successfully
           schema:
             $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
+        '400': { description: Invalid Fields }
+        '500': { description: Internal Server Error }
+
   /user/profile:
     get:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
+      security: [ { Bearer: [] } ]
+      tags: [User Module]
+      summary: Get user profile
       description: API for fetching a user profile
-      #produces:
-       # - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
+            $ref: '#/definitions/UserProfile'
+        '400': { description: Invalid Fields }
+        '500': { description: Internal Server Error }
+
     put:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
-      description: API for updating a user profile
+      security: [ { Bearer: [] } ]
+      tags: [User Module]
+      summary: Update user profile
+      description: Update username for the current user
       parameters:
         - in: body
           name: body
-          description: Update user profile attributes
           required: true
           schema:
-            $ref: '#/definitions/UserProfile'
-      produces:
-        - application/json
+            $ref: '#/definitions/UserProfileUpdate'
+      produces: [application/json]
       responses:
         '200':
-          description: User profile retrieved successully
+          description: Profile updated successfully
           schema:
             $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
+        '400': { description: Invalid Fields }
+        '500': { description: Internal Server Error }
+
+  /user/transactions:
+    get:
+      security: [ { Bearer: [] } ]
+      tags: [Transaction Module]
+      summary: Get current user's transactions
+      description: Returns all transactions for the current month, grouped by account
+      responses:
+        '200':
+          description: Transactions retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        '401': { description: Unauthorized }
+
+  /user/transactions/{transactionId}:
+    get:
+      security: [ { Bearer: [] } ]
+      tags: [Transaction Module]
+      summary: Get transaction detail
+      description: Get the details of a specific transaction
+      parameters:
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: ID of the transaction
+      responses:
+        '200':
+          description: Transaction detail retrieved
+          schema:
+            $ref: '#/definitions/Transaction'
+        '404': { description: Transaction not found }
+        '401': { description: Unauthorized }
+
+    patch:
+      security: [ { Bearer: [] } ]
+      tags: [Transaction Module]
+      summary: Update transaction
+      description: Modify note or category of a transaction
+      parameters:
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdate'
+      responses:
+        '200':
+          description: Transaction updated successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400': { description: Invalid data }
+        '401': { description: Unauthorized }
+
 securityDefinitions:
   Bearer:
     type: apiKey
     name: Authorization
     in: header
+
 definitions:
-  User:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-      firstName:
-        type: string
-        description: user first name
-      lastName:
-        type: string
-        description: user last name
-      userName:
-        type: string
-        description: user public name
   Login:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-  ApiResponse:
     type: object
     properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-          email:
-            type: string
+      email: { type: string }
+      password: { type: string }
+
   LoginResponse:
     type: object
     properties:
-      token:
-        type: string
+      token: { type: string }
+
+  User:
+    type: object
+    properties:
+      email: { type: string }
+      password: { type: string }
+      firstName: { type: string }
+      lastName: { type: string }
+      userName: { type: string }
+
   UserProfile:
     type: object
     properties:
-      userName:
+      id: { type: string }
+      email: { type: string }
+      userName: { type: string }
+      firstName: { type: string }
+      lastName: { type: string }
+
+  UserProfileUpdate:
+    type: object
+    properties:
+      userName: { type: string }
+
+  ApiResponse:
+    type: object
+    properties:
+      status: { type: integer }
+      message: { type: string }
+      body:
+        type: object
+
+  Transaction:
+    type: object
+    properties:
+      id: { type: string }
+      accountId: { type: string }
+      date:
         type: string
+        format: date
+      amount:
+        type: number
+        format: float
+      type:
+        type: string
+        enum: [credit, debit]
+      description: { type: string }
+      category: { type: string }
+      note: { type: string }
+
+  TransactionUpdate:
+    type: object
+    properties:
+      category: { type: string }
+      note: { type: string }
+

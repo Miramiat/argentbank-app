@@ -1,20 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-// async action : login API call
-export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, thunkAPI) => {
-  try {
-    const response = await fetch('http://localhost:3001/api/v1/user/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials),
-    })
-    const data = await response.json()
-    if (response.ok) return data
-    return thunkAPI.rejectWithValue(data)
-  } catch (error) {
-    return thunkAPI.rejectWithValue({ message: error.message })
+// 🎯 Action asynchrone de login
+export const loginUser = createAsyncThunk(
+  'auth/loginUser',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/user/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      })
+      const data = await response.json()
+      if (response.ok) return data
+      return thunkAPI.rejectWithValue(data)
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ message: error.message })
+    }
   }
-})
+)
 
 const authSlice = createSlice({
   name: 'auth',
@@ -29,6 +32,9 @@ const authSlice = createSlice({
       state.user = null
       state.token = null
       localStorage.removeItem('token')
+    },
+    setToken: (state, action) => {
+      state.token = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -49,6 +55,7 @@ const authSlice = createSlice({
   },
 })
 
-export const { logout } = authSlice.actions
+export const { logout, setToken } = authSlice.actions
 export default authSlice.reducer
+
 
