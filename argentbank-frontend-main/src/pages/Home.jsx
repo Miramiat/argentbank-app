@@ -15,7 +15,7 @@ function Home() {
         <section className="features">
           <div className="feature-item">
             <img
-              src="/src/designs/img/icon-chat.png"
+              src="/src/designs/img/icon-chat.webp"
               alt="Chat Icon"
               className="feature-icon"
             />
@@ -27,7 +27,7 @@ function Home() {
           </div>
           <div className="feature-item">
             <img
-              src="/src/designs/img/icon-money.png"
+              src="/src/designs/img/icon-money.webp"
               alt="Money Icon"
               className="feature-icon"
             />
@@ -38,7 +38,7 @@ function Home() {
           </div>
           <div className="feature-item">
             <img
-              src="/src/designs/img/icon-security.png"
+              src="/src/designs/img/icon-security.webp"
               alt="Security Icon"
               className="feature-icon"
             />
